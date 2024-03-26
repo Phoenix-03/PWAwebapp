@@ -3,7 +3,7 @@
 <head>
 	
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -330,26 +330,17 @@ href="manifest.json">
 	<script type="text/javascript" src="js/uikit-icons.min.js"></script>
 
 	<script>
-		// Add event listener to execute code when page loads
-		window.addEventListener('load', () => {
-			// Call registerSW function when page loads
-			registerSW();
-		});
-	
-		// Register the Service Worker
-		async function registerSW() {
-			// Check if browser supports Service Worker
-			if ('serviceWorker' in navigator) {
-				try {
-					// Register the Service Worker named 'serviceworker.js'
-					await navigator.serviceworker.register('serviceworker.js');
-				}
-				catch (e) {
-					// Log error message if registration fails
-					console.log('SW registration failed');
-				}
-			}
-		}
+	if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/serviceworker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+}
 	</script>
 	
 </body>
